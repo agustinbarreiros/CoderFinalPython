@@ -1,0 +1,70 @@
+body {
+    background-color: #FFFAF0;
+    color: black;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    background-color: #800080 !important;
+    color: white !important;
+}
+
+.navbar-brand{
+    color: white
+}
+.navbar .nav-link {
+    color: white;     
+    text-align: center;
+}
+
+.contenido .welcome {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .form-control {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  
+  .btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+
+.my-footer {
+    background-color: #800080 !important;
+    color: white;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+
+.blog-list-container {
+    margin-bottom: 80px; 
+  }
+  
+  .create-blog-button {
+    margin-top: 20px;
+  }
+
+.botonSubmit{
+    margin-bottom: 80px; 
+}

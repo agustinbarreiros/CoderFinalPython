@@ -1,0 +1,14 @@
+<!-- templates/blog/detalle_pagina.html -->
+
+
+{% extends 'blog/inicio.html' %}
+
+{% block content %}
+<h2>{{ pagina.titulo }}</h2>
+<p>{{ pagina.subtitulo }}</p>
+<p>{{ pagina.fecha }}</p>
+<p>{{ pagina.autor.username }}</p>
+<p>{{ pagina.cuerpo }}</p>
+<img src="{{ pagina.imagen.url }}" alt="Imagen del blog">
+
+{% endblock %}

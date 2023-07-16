@@ -1,0 +1,49 @@
+<!-- templates/blog/mensajes.html -->
+{% extends 'blog/inicio.html' %}
+
+{% block content %}
+<h1>Mensajes</h1>
+
+<h2>Mensajes enviados:</h2>
+{% if mensajes_enviados %}
+<ul>
+  {% for mensaje in mensajes_enviados %}
+  <li>De: {{ mensaje.remitente.username }} - {{ mensaje.fecha }}</li>
+  <li>{{ mensaje.contenido }}</li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No hay mensajes enviados.</p>
+{% endif %}
+
+<h2>Mensajes recibidos:</h2>
+{% if mensajes_recibidos %}
+<ul>
+  {% for mensaje in mensajes_recibidos %}
+  <li>De: {{ mensaje.remitente.username }} - {{ mensaje.fecha }}</li>
+  <li>{{ mensaje.contenido }}</li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No hay mensajes recibidos.</p>
+{% endif %}
+
+<h2>Enviar mensaje:</h2>
+<form method="post">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="id_destinatario">Destinatario:</label>
+    <select class="form-control" id="id_destinatario" name="destinatario">
+      {% for user in users %}
+        <option value="{{ user.id }}">{{ user.username }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="id_contenido">Contenido:</label>
+    <textarea class="form-control" id="id_contenido" name="contenido" rows="3"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+</form>
+{% endblock %}
+

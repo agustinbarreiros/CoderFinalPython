@@ -1,0 +1,28 @@
+
+{% extends 'blog/inicio.html' %}
+
+{% block content %}
+  <div class="blog-list-container">
+    <h2>Lista de Blogs</h2>
+    {% for blog in blogs %}
+      <div class="blog-item">
+        <h3>{{ blog.titulo }}</h3>
+        <p>{{ blog.subtitulo }}</p>
+        <img src="{{ blog.imagen.url }}" alt="{{ blog.titulo }}">
+        <p>{{ blog.cuerpo }}</p>
+        <p>Autor: {{ blog.autor }}</p>
+        <p>Fecha: {{ blog.fecha }}</p>       
+        {% if user.is_superuser %}
+          <a href="{% url 'editar_blog' blog.id %}">Editar</a>
+          <a href="{% url 'eliminar_blog' blog.id %}">Eliminar</a>
+        {% endif %}
+      </div>
+    {% empty %}
+      <p>No hay blogs aún.</p>
+    {% endfor %}
+  </div>
+
+  <div class="create-blog-button">
+    <a href="{% url 'crear_blog' %}" class="btn btn-primary">Crear Blog</a>
+  </div>
+{% endblock %}

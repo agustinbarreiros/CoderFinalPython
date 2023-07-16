@@ -1,0 +1,15 @@
+{% extends 'blog/inicio.html' %}
+
+{% block content %}
+<h1>Perfil</h1>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <div>
+    {% if form.instance.imagen %}
+      <img src="{{ form.instance.imagen.url }}" alt="Imagen de perfil">
+    {% endif %}
+  </div>
+  <button class="botonSubmit" type="submit">Guardar</button>
+</form>
+{% endblock %}
