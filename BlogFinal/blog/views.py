@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
-
+from django.contrib import messages
 
 
 def inicio(request):
@@ -55,29 +55,34 @@ def perfil(request):
     return render(request, 'blog/perfil.html', {'form': form})
 
 @login_required
-def enviar_mensaje(request):
-    users = User.objects.exclude(id=request.user.id)  # Excluir al remitente actual
+def enviar_mensaje(request, destinatario_id):
+    destinatario = User.objects.get(id=destinatario_id)
 
     if request.method == 'POST':
         form = MensajeForm(request.POST)
-        if form.is_valid():
-            mensaje = form.save(commit=False)
-            mensaje.remitente = request.user
-            mensaje.destinatario = User.objects.get(id=request.POST['destinatario'])
-            mensaje.save()
+        if form.is_valid():            
+            mensaje_enviado = Mensaje(remitente=request.user, destinatario=destinatario, contenido=form.cleaned_data['contenido'])
+            mensaje_enviado.save()
+            mensaje_recibido = Mensaje(remitente=request.user, destinatario=destinatario, contenido=form.cleaned_data['contenido'])
+            mensaje_recibido.save()
+            request.user.mensajes_enviados.add(mensaje_enviado)
+            request.user.mensajes_recibidos.add(mensaje_recibido)            
+            messages.success(request, '¡Mensaje enviado con éxito!')
             return redirect('mensajes')
     else:
         form = MensajeForm()
     
-    return render(request, 'blog/enviar_mensaje.html', {'form': form, 'users': users})
-
+    return render(request, 'blog/enviar_mensaje.html', {'form': form, 'destinatario': destinatario})
 
 @login_required
 def mensajes(request):
-    mensajes_enviados = request.user.mensajes_enviados.all()
+    print(request.user)
+    mensajes_enviados = Mensaje.objects.filter(remitente=request.user)
     mensajes_recibidos = request.user.mensajes_recibidos.all()
+    users = User.objects.exclude(id=request.user.id)
+    print(mensajes_enviados)  
 
-    return render(request, 'blog/mensajes.html', {'mensajes_enviados': mensajes_enviados, 'mensajes_recibidos': mensajes_recibidos})
+    return render(request, 'blog/mensajes.html', {'mensajes_enviados': mensajes_enviados, 'mensajes_recibidos': mensajes_recibidos, 'users': users})
 
 
 
@@ -154,3 +159,8 @@ def logout_view(request):
     logout(request)
     # Redirige a la página de inicio o a cualquier otra página deseada
     return redirect('inicio')    
+
+
+def ver_mensaje(request, mensaje_id):
+    mensaje = get_object_or_404(Mensaje, id=mensaje_id)
+    return render(request, 'blog/detalle_mensaje.html', {'mensaje': mensaje})

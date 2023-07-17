@@ -55,11 +55,6 @@ body {
     width: 100%;
     text-align: center;
 }
-
-
-.blog-list-container {
-    margin-bottom: 80px; 
-  }
   
   .create-blog-button {
     margin-top: 20px;
@@ -67,4 +62,14 @@ body {
 
 .botonSubmit{
     margin-bottom: 80px; 
+}
+
+.blog-list-container {
+  margin-bottom: 120px; /* Aumenta el margen inferior para dejar espacio al footer */
+}
+
+.create-blog-button {
+  margin-top: 20px;
+  margin-bottom: 300px;
+ 
 }

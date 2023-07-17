@@ -1,4 +1,3 @@
-<!-- templates/blog/mensajes.html -->
 {% extends 'blog/inicio.html' %}
 
 {% block content %}
@@ -20,7 +19,7 @@
 {% if mensajes_recibidos %}
 <ul>
   {% for mensaje in mensajes_recibidos %}
-  <li>De: {{ mensaje.remitente.username }} - {{ mensaje.fecha }}</li>
+  <li>De: <a href="{% url 'ver_mensaje' mensaje.id %}">{{ mensaje.remitente.username }}</a> - {{ mensaje.fecha }}</li>
   <li>{{ mensaje.contenido }}</li>
   {% endfor %}
 </ul>
@@ -46,4 +45,3 @@
   <button type="submit" class="btn btn-primary">Enviar mensaje</button>
 </form>
 {% endblock %}
-

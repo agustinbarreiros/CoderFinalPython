@@ -20,10 +20,11 @@ class PerfilForm(forms.ModelForm):
 
 
 class MensajeForm(forms.ModelForm):
+    destinatario = forms.ModelChoiceField(queryset=User.objects.all())
+
     class Meta:
         model = Mensaje
-        fields = ['contenido']
-
+        fields = ['destinatario', 'contenido']
 
 class BlogForm(forms.ModelForm):
     class Meta:

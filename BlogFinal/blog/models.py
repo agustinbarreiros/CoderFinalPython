@@ -17,8 +17,7 @@ class Perfil(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
     imagen = models.ImageField(upload_to='perfil_imagenes/', blank=True)
     descripcion = models.TextField(blank=True)
-    #pagina_web = models.URLField(blank=True)
-
+    
     def __str__(self):
         return self.usuario.username 
 

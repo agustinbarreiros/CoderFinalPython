@@ -23,4 +23,5 @@ urlpatterns = [
     path('accounts/profile/editar/', views.editar_perfil, name='editar_perfil'),
     path('accounts/profile/borrar/', views.borrar_perfil, name='borrar_perfil'),
     path('logout/', logout_view, name='logout'),
+    path('mensaje/<int:mensaje_id>/', views.ver_mensaje, name='ver_mensaje')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

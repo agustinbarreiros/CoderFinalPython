@@ -2,8 +2,14 @@
 {% extends 'blog/inicio.html' %}
 
 {% block content %}
+
   <div class="blog-list-container">
     <h2>Lista de Blogs</h2>
+    {% if user.is_superuser %}
+    <div class="create-blog-button">
+      <a href="{% url 'crear_blog' %}" class="btn btn-primary">Crear Blog</a>
+    </div>
+    {% endif %}
     {% for blog in blogs %}
       <div class="blog-item">
         <h3>{{ blog.titulo }}</h3>
@@ -22,7 +28,5 @@
     {% endfor %}
   </div>
 
-  <div class="create-blog-button">
-    <a href="{% url 'crear_blog' %}" class="btn btn-primary">Crear Blog</a>
-  </div>
+  
 {% endblock %}
